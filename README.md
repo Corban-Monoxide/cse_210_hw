@@ -1,5 +1,5 @@
 # cse210-student-template
-This is the starter code for students in CSE 210.
+Corban Critchfield is a real homie g. Dap me up brotha!
 
 This repository contains the starter code for many different projects. They are arranged as follows:
 
