@@ -1,10 +1,10 @@
-// class Person
-// {
-//     public string name;
-//     public string phone;
+class Person
+{
+    public string name;
+    public string phone;
 
-//     public string DisplayString()
-//     {
-//         return $"{name} {phone}";
-//     }
-// }
+    public string DisplayString()
+    {
+        return $"{name} {phone}";
+    }
+}
