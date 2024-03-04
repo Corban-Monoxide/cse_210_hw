@@ -28,12 +28,12 @@ public class Journal
         Console.WriteLine("Press a key to continue ");
         Console.ReadKey();
     }
-    public string Export()
+    public string[] Export()
     {
         var exportLines = new List<string>();
         foreach (var enter in entries)
         {
-            exportLines.Add(enter.Export);
+            exportLines.Add(enter.Export());
         }
         return exportLines.ToArray();
     }

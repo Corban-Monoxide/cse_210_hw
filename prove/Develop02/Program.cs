@@ -1,12 +1,19 @@
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 class Program
-{   
-    static public Journal journal;
+{
     static void Main(string[] args)
     {
-    Journal journal = new Journal();
+        string[] prompts = {
+        "What was the highlight of your day?",
+        "Describe a challenge you faced today.",
+        "What are you grateful for today?",
+        "Write about a goal you want to achieve.",
+        "Reflect on a lesson you learned recently."
+    };
+
+
+        Journal journal = new Journal();
         bool keepGoing = true;
         while (keepGoing)
         {
@@ -14,12 +21,13 @@ class Program
 
             if (selection == 1)
             {
-            // Prompt user with a random prompt
-            var prompt = "This was a random prompt";
-            // Read in user input
-            var placeholderResponse = "This is what the user typed in";
-            var entry = new Entry(prompt, placeholderResponse);
-            journal.AddEntry(entry);
+                // Prompt user with a random prompt
+                var prompt = GetPrompt();
+                Console.WriteLine(prompt);
+                // Read in user input
+                var placeholderResponse = Console.ReadLine();
+                var entry = new Entry(prompt, placeholderResponse);
+                journal.AddEntry(entry);
             }
 
             else if (selection == 2)
@@ -30,12 +38,12 @@ class Program
             else if (selection == 3)
             {
                 var lines = journal.Export();
-                WriteFile(lines);
+                SaveToFile(lines);
             }
 
             else if (selection == 4)
             {
-                var lines = ReadFile();
+                var lines = LoadFromFile();
                 journal = new Journal(lines);
             }
 
@@ -44,37 +52,40 @@ class Program
                 keepGoing = false;
             }
         }
-    public string GetPrompt()
-    {
-        return "";
-    }
 
-    static int ShowMenu()
-    {
-        Console.WriteLine("Journal System:");
-        Console.WriteLine("1) Write ");
-        Console.WriteLine("2) Display ");
-        Console.WriteLine("3) Load ");
-        Console.WriteLine("4) Save ");
-        Console.WriteLine("5) Quit");
+        string GetPrompt()
+        {
+        Random rand = new Random();
+        int index = rand.Next(prompts.Length);
+        return prompts[index];
+        }
 
-        Console.WriteLine("\nPlease make a choice: ");
-        string input = int.Parse(Console.ReadLine());
-        return input;
-    }
+        static int ShowMenu()
+        {
+            Console.WriteLine("Journal System:");
+            Console.WriteLine("1) Write ");
+            Console.WriteLine("2) Display ");
+            Console.WriteLine("3) Load ");
+            Console.WriteLine("4) Save ");
+            Console.WriteLine("5) Quit");
 
-    static string[] SaveToFile()
-    {
-        Console.Write("Enter filename: ");
-        var filename = Console.ReadLine();
-        return System.IO.File.ReadAllLines(filename);
-    }
+            Console.WriteLine("\nPlease make a choice: ");
+            int input = int.Parse(Console.ReadLine());
+            return input;
+        }
 
-    static void LoadFromFile(string[] lines)
-    {
-        Console.Write("Enter filename: ");
-        var filename = Console.ReadLine();
-        System.IO.File.WriteAllLines(filename, lines);
+        static string[] LoadFromFile()
+        {
+            Console.Write("Enter filename: ");
+            var filename = Console.ReadLine();
+            return System.IO.File.ReadAllLines(filename);
+        }
+
+        static void SaveToFile(string[] lines)
+        {
+            Console.Write("Enter filename: ");
+            var filename = Console.ReadLine();
+            System.IO.File.WriteAllLines(filename, lines);
+        }
     }
-}
 }
