@@ -1,17 +1,11 @@
-public class SimpleGoal:Goal
+public class SimpleGoal : Goal
 {
-    private bool completed;
-    public SimpleGoal():base()
+    public SimpleGoal() : base()
     {
-        completed = false;
-    }
-    public SimpleGoal(string filename)
-    {
-        completed = false;
-    }
 
-    // public override string Export() 
-    // {
-    //     base.Export();
-    // }
+    }
+    public SimpleGoal(string data) : base()
+    {
+
+    }
 }
